@@ -26,24 +26,28 @@ namespace GUI
         }
         private void OpenChildform(Form childForm)
         {
-            currentChildform = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            pnlChildform.Controls.Add(currentChildform);
-            childForm.BringToFront();
-            childForm.Show();
+                currentChildform = childForm;
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;
+                childForm.Dock = DockStyle.Fill;
+                pnlChildform.Controls.Add(currentChildform);
+                childForm.BringToFront();
+                childForm.Show();
+            
         }
 
-        private void btnName_Click(object sender, EventArgs e)
-        {
-            OpenChildform(new BookForm());
-        }
+       
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            Owner.Show();
+            if (Owner != null && !Owner.Disposing && !Owner.IsDisposed && !Owner.Visible)
+                Owner.Show();
             this.Close();
+        }
+
+        private void btnBook_Click(object sender, EventArgs e)
+        {
+            OpenChildform(new BookForm());
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading;
 
 namespace DAL
 {
@@ -13,23 +14,62 @@ namespace DAL
         public async Task<SqlDataReader> UserHaveExist(string eMail)
         {
             eMail = eMail.ToLower();
-            using (SqlDataAdapter myAdapter = new SqlDataAdapter())
+            using (SqlCommand myCommand = new SqlCommand())
             {
-                using (SqlCommand myCommand = new SqlCommand())
+                myCommand.Connection = await openConnection();
+                myCommand.CommandText = $"SELECT u.Mail, u.Pass FROM [USER] AS u WHERE u.Mail = '{eMail}'";
+                var reader = await myCommand.ExecuteReaderAsync();
+                if (reader.HasRows)
                 {
-                    myCommand.Connection = await openConnection();
-                    myCommand.CommandText = $"SELECT u.Mail, u.Pass FROM [USER] AS u WHERE u.Mail = '{eMail}'";
-                    var reader = await myCommand.ExecuteReaderAsync();
-                    if (reader.HasRows)
-                    {
-                        return reader;
-                    }
-                    closeConnection();
-                    return null;
+                    return reader;
                 }
+                closeConnection();
+                return null;
             }
         }
 
+        //public async Task<bool> CheckAccount(string eMail, string Pass, CancellationToken cancellationToken)
+        //{
+        //    try
+        //    {
+        //        Thread.Sleep(5000);
+        //        if (cancellationToken.IsCancellationRequested)
+        //        {
+        //            cancellationToken.ThrowIfCancellationRequested();
+                    
+        //        }
+        //        var reader = await UserHaveExist(eMail);
+        //        if (reader != null)
+        //        {
+        //            while (await reader.ReadAsync())
+        //            {
+        //                if (Pass == reader.GetString(1))
+        //                {
+        //                    return true;
+        //                }
+        //                else
+        //                {
+        //                    throw new Exception("Incorrect password");
+        //                };
+        //            }
+        //        }
+        //        else
+        //        {
+        //            throw new Exception("Please check your account information");
+        //        }
+                
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        throw e;
+        //    }
+        //    finally
+        //    {
+        //        closeConnection();
+        //    }
+        //    return false;
+        //}
         public async Task<bool> CheckAccount(string eMail, string Pass)
         {
             try
@@ -43,9 +83,9 @@ namespace DAL
                         {
                             return true;
                         }
-                        else 
+                        else
                         {
-                            throw new Exception("Incorrect password"); 
+                            throw new Exception("Incorrect password");
                         };
                     }
                 }
@@ -53,12 +93,14 @@ namespace DAL
                 {
                     throw new Exception("Please check your account information");
                 }
+
             }
             catch (Exception e)
             {
-                
+
                 throw e;
-            }finally
+            }
+            finally
             {
                 closeConnection();
             }

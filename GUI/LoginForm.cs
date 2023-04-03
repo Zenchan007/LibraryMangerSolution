@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAL;
@@ -13,7 +14,7 @@ namespace GUI
 {
     public partial class LoginForm : Form
     {
-        
+        private CancellationTokenSource cancellationTokenSource;
         public LoginForm()
         {
             InitializeComponent();
@@ -59,50 +60,113 @@ namespace GUI
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
+        #endregion
+        //private void btnLogin_Click(object sender, EventArgs e)
+        //{
+        //    cancellationTokenSource = new CancellationTokenSource();
+        //    CancellationToken cancellationToken = cancellationTokenSource.Token;
+        //    if (btnLogin.Text == "LOGIN")
+        //    {
+        //        btnLogin.Text = "CANCEL";
+        //        string strEmail = txtEmail.Texts;
+        //        string strPass = txtPassword.Texts;
+        //        UserDAL userDAL = new UserDAL();
+        //        var task = userDAL.CheckAccount(strEmail, strPass, cancellationToken);
+
+        //        task.ContinueWith(antecedent =>
+        //        {
+        //            try
+        //            {
+        //                if (antecedent.IsCanceled)
+        //                {
+        //                    MessageBox.Show("Operation canceled.");
+        //                }
+        //                else if (antecedent.IsFaulted)
+        //                {
+        //                    Exception ex = antecedent.Exception.InnerException;
+        //                    errProvider.SetError(txtEmail, ex.Message);
+        //                }
+        //                else if (antecedent.Result)
+        //                {
+        //                    DashboardForm dashboardForm = new DashboardForm();
+        //                    dashboardForm.Show(this);
+        //                    Hide();
+        //                }
+        //                else
+        //                {
+        //                    MessageBox.Show("Invalid email or password.");
+        //                }
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                errProvider.SetError(txtEmail, ex.Message);
+        //            }
+        //            finally
+        //            {
+        //                cancellationTokenSource.Dispose();
+        //            }
+        //        }, cancellationToken);
+
+        //    }
+        //    else
+        //    {
+        //        if (cancellationTokenSource != null)
+        //        {
+        //            cancellationTokenSource.Cancel();
+        //            btnLogin.Text = "LOGIN";
+        //        }
+        //    }
+        //}
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            string strEmail = txtEmail.Texts;
-            string strPass = txtPassword.Texts;
-            try
+            if (btnLogin.Text == "LOGIN")
             {
-                strEmail = strEmail.ToLower();
+                btnLogin.Text = "CANCEL";
+                string strEmail = txtEmail.Texts;
+                string strPass = txtPassword.Texts;
                 UserDAL userDAL = new UserDAL();
-                if (await userDAL.CheckAccount(strEmail, strPass))
+                bool checkAc = await userDAL.CheckAccount(strEmail, strPass);
+                try
                 {
-                    DashboardForm dashboardForm = new DashboardForm();
-                    dashboardForm.Show(this);
-                    Hide();
+                    if (checkAc)
+                    {
+                        DashboardForm dashboardForm = new DashboardForm();
+                        dashboardForm.Show(this);
+                        Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid email or password.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errProvider.SetError(txtEmail, ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                errProvider.SetError(txtEmail, ex.Message);
-            }
         }
-
         private void lblSignup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             RegisterForm register = new RegisterForm();
             register.Show(this);
-            Hide(); 
+            Hide();
         }
-        #endregion  
         #region xử lý các sự kiện nhấp vào và nhả ra của của ô email và ô password
-        
+
         private void txtPassword_Enter(object sender, EventArgs e)
         {
             if (txtPassword.Texts == "PASSWORD")
             {
                 txtPassword.Texts = "";
-               
+
             }
             txtPassword.ForeColor = Color.White;
             txtPassword.PasswordChar = true;
         }
 
-        
-       
+
+
         private void txtPassword_Leave(object sender, EventArgs e)
         {
             if (txtPassword.Texts == "")
@@ -120,7 +184,6 @@ namespace GUI
             }
             txtEmail.ForeColor = Color.DimGray;
         }
-
         private void txtEmail_Enter(object sender, EventArgs e)
         {
             if (txtEmail.Texts == "EMAIL")
@@ -130,7 +193,6 @@ namespace GUI
             txtEmail.ForeColor = Color.White;
         }
         #endregion
-
     }
 
 }

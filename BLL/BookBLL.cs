@@ -8,7 +8,5 @@ namespace BLL
 {
     public class BookBLL
     {
-        
-       
     }
 }

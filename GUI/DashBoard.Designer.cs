@@ -34,7 +34,7 @@
             this.btnLogout = new FontAwesome.Sharp.IconButton();
             this.btnBorrowbook = new FontAwesome.Sharp.IconButton();
             this.btnAuthor = new FontAwesome.Sharp.IconButton();
-            this.btnName = new FontAwesome.Sharp.IconButton();
+            this.btnBook = new FontAwesome.Sharp.IconButton();
             this.pnlLogo = new System.Windows.Forms.Panel();
             this.pnlChildform = new System.Windows.Forms.Panel();
             this.iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
@@ -43,14 +43,14 @@
             // 
             // pnlNav
             // 
-            this.pnlNav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(103)))), ((int)(((byte)(156)))));
+            this.pnlNav.BackColor = System.Drawing.Color.Turquoise;
             this.pnlNav.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlNav.Controls.Add(this.btnAccount);
             this.pnlNav.Controls.Add(this.btnReport);
             this.pnlNav.Controls.Add(this.btnLogout);
             this.pnlNav.Controls.Add(this.btnBorrowbook);
             this.pnlNav.Controls.Add(this.btnAuthor);
-            this.pnlNav.Controls.Add(this.btnName);
+            this.pnlNav.Controls.Add(this.btnBook);
             this.pnlNav.Controls.Add(this.pnlLogo);
             this.pnlNav.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlNav.Location = new System.Drawing.Point(0, 0);
@@ -175,29 +175,29 @@
             this.btnAuthor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAuthor.UseVisualStyleBackColor = true;
             // 
-            // btnName
+            // btnBook
             // 
-            this.btnName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnName.FlatAppearance.BorderSize = 0;
-            this.btnName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnName.Font = new System.Drawing.Font("Yu Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnName.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.btnName.IconChar = FontAwesome.Sharp.IconChar.BookOpen;
-            this.btnName.IconColor = System.Drawing.Color.Black;
-            this.btnName.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnName.IconSize = 36;
-            this.btnName.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnName.Location = new System.Drawing.Point(5, 187);
-            this.btnName.Margin = new System.Windows.Forms.Padding(5);
-            this.btnName.Name = "btnName";
-            this.btnName.Padding = new System.Windows.Forms.Padding(5);
-            this.btnName.Size = new System.Drawing.Size(247, 60);
-            this.btnName.TabIndex = 1;
-            this.btnName.Text = "Sách";
-            this.btnName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnName.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnName.UseVisualStyleBackColor = true;
-            this.btnName.Click += new System.EventHandler(this.btnName_Click);
+            this.btnBook.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBook.FlatAppearance.BorderSize = 0;
+            this.btnBook.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBook.Font = new System.Drawing.Font("Yu Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBook.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.btnBook.IconChar = FontAwesome.Sharp.IconChar.BookOpen;
+            this.btnBook.IconColor = System.Drawing.Color.Black;
+            this.btnBook.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnBook.IconSize = 36;
+            this.btnBook.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBook.Location = new System.Drawing.Point(5, 187);
+            this.btnBook.Margin = new System.Windows.Forms.Padding(5);
+            this.btnBook.Name = "btnBook";
+            this.btnBook.Padding = new System.Windows.Forms.Padding(5);
+            this.btnBook.Size = new System.Drawing.Size(247, 60);
+            this.btnBook.TabIndex = 1;
+            this.btnBook.Text = "Sách";
+            this.btnBook.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBook.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBook.UseVisualStyleBackColor = true;
+            this.btnBook.Click += new System.EventHandler(this.btnBook_Click);
             // 
             // pnlLogo
             // 
@@ -247,7 +247,7 @@
 
         private System.Windows.Forms.Panel pnlNav;
         private System.Windows.Forms.Panel pnlLogo;
-        private FontAwesome.Sharp.IconButton btnName;
+        private FontAwesome.Sharp.IconButton btnBook;
         private FontAwesome.Sharp.IconButton btnLogout;
         private FontAwesome.Sharp.IconButton btnBorrowbook;
         private FontAwesome.Sharp.IconButton btnAuthor;

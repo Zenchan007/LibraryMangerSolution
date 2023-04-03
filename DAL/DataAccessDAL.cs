@@ -9,7 +9,6 @@ namespace DAL
 {
     public class DataAccessDAL
     {
-        //protected SqlDataAdapter myAdapter;
         protected SqlConnection conn;
         protected string strCon = @"Data Source=DESKTOP-Q5AEVAH\SQLEXPRESS;Initial Catalog=LibraryManage;Integrated Security=True";
         public DataAccessDAL()

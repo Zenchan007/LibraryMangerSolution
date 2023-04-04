@@ -10,34 +10,12 @@ namespace DAL
 {
     public class BookDAL : DataAccessDAL
     {
-        public static int countSize;
+        
         public static int maxPage;
-        //public async Task<DataSet> getDataBook()
-        //{
-        //    try
-        //    {
-        //        DataSet ds = new DataSet();
-        //        SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-Q5AEVAH\SQLEXPRESS;Initial Catalog=LibraryManage;Integrated Security=True");
-        //        string query = "Select b.Name as 'Tên sách', a.Name as 'Tên tác giả', c.Name as 'Tên thể loại', " +
-        //                        "b.Price as 'Giá', b.Status as 'Trạng thái', b.Quantity as 'Số lượng' " +
-        //                        "FROM BOOK as b join AUTHOR as a on b.IDAuthor = a.ID join CATEGORY as c on b.IDCategory = c.ID";
-        //        using(var myAdapter = new SqlDataAdapter(query, conn))
-        //        {
-        //            conn.Open();
-        //            myAdapter.Fill(ds);
-        //            return ds;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //        conn.Close();
-        //    }
-        //}
 
         public async Task<DataSet> getDataBook(string bookName, string author, string category, string status, int pageIndex, int pageSize)
         {
-
+            int countSize = 0;
             try
             {
                 using (SqlCommand myCommand = new SqlCommand())

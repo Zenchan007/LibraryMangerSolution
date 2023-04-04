@@ -236,6 +236,7 @@
             this.Controls.Add(this.pnlChildform);
             this.Controls.Add(this.pnlNav);
             this.Name = "DashboardForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BookForm";
             this.Load += new System.EventHandler(this.BookForm_Load);
             this.pnlNav.ResumeLayout(false);

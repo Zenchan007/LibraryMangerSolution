@@ -265,7 +265,7 @@
             // 
             // txtPage
             // 
-            this.txtPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPage.Enabled = false;
             this.txtPage.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -300,7 +300,7 @@
             // 
             // txtStatusInfor
             // 
-            this.txtStatusInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtStatusInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtStatusInfor.BackColor = System.Drawing.SystemColors.Window;
             this.txtStatusInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
@@ -322,7 +322,7 @@
             // 
             // txtCategoryInfor
             // 
-            this.txtCategoryInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtCategoryInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCategoryInfor.BackColor = System.Drawing.SystemColors.Window;
             this.txtCategoryInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
@@ -344,7 +344,7 @@
             // 
             // txtAuthorInfor
             // 
-            this.txtAuthorInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAuthorInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAuthorInfor.BackColor = System.Drawing.SystemColors.Window;
             this.txtAuthorInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
@@ -366,7 +366,7 @@
             // 
             // txtBookInfor
             // 
-            this.txtBookInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtBookInfor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBookInfor.BackColor = System.Drawing.SystemColors.Window;
             this.txtBookInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;

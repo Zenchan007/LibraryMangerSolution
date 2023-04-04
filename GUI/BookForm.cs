@@ -15,7 +15,6 @@ namespace GUI
     {
         int pageIndex = 0;
         int pageSize = 50;
-        int totalCount;
         int maxPage;
         DataSet ds = null;
         public BookForm()
@@ -40,7 +39,6 @@ namespace GUI
             ds = await bookDAL.getDataBook(bookName, author, category, status, pageIndex, pageSize);
             //MessageBox.Show(ds.Tables[0].Rows.Count.ToString());
             dtgBook.DataSource = ds.Tables[0];
-            totalCount = BookDAL.countSize;
             maxPage = BookDAL.maxPage;
             if (pageIndex == 0)
             {
@@ -155,7 +153,7 @@ namespace GUI
 
         private async void ibtnBack_Click(object sender, EventArgs e)
         {
-            if (pageIndex != 0)
+            if (pageIndex > 0)
             {
                 this.pageIndex--;
                 await Load_Data();
@@ -164,7 +162,7 @@ namespace GUI
 
         private async void ibtnNext_Click(object sender, EventArgs e)
         {
-            if (pageIndex != totalCount)
+            if (pageIndex < maxPage)
             {
                 this.pageIndex++;
                 await Load_Data();

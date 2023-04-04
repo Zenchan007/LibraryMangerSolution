@@ -70,34 +70,48 @@ namespace GUI
                 string strEmail = txtEmail.Texts;
                 string strPass = txtPassword.Texts;
                 UserDAL userDAL = new UserDAL();
-                var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationTokenSource.Token);
-                await taskCheckAccount.ContinueWith(t =>
-               {
-                   if (t.IsCanceled)
-                   {
-                       Trace.WriteLine("Hủy đăng đăng nhập");
-                   }
-                   else if (t.Result)
-                   {
-                       this.Invoke(new Action(() =>
-                       {
-                           Trace.WriteLine("Đăng nhập thành công");
-                           DashboardForm dashboardForm = new DashboardForm();
-                           dashboardForm.Show(this);
-                           Hide();
-                       }));
-                   }
-                   else if (t.IsFaulted)
-                   {
-                       Trace.WriteLine("Có lỗi khi đang nhập");
-                   }
-                   else
-                   {
-                       errProvider.SetError(txtEmail, "Sai thông tin đăng nhập, vui lòng kiểm tra lại");
-                   }
-                   cancellationTokenSource.Dispose();
-                   cancellationTokenSource = new CancellationTokenSource();
-               });
+                try
+                {
+                    var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationTokenSource.Token);
+                    await taskCheckAccount.ContinueWith(t =>
+                    {
+                        if (t.IsCanceled)
+                        {
+                            Trace.WriteLine("Hủy đăng đăng nhập");
+                        }
+                        else if (t.Result)
+                        {
+                            this.Invoke(new Action(() =>
+                            {
+                                Trace.WriteLine("Đăng nhập thành công");
+                                DashboardForm dashboardForm = new DashboardForm();
+                                dashboardForm.Show(this);
+                                Hide();
+                            }));
+                        }
+                        else if (t.IsFaulted)
+                        {
+                            Trace.WriteLine("Có lỗi khi đang nhập");
+                        }
+                        else
+                        {
+                            tblLogin.Invoke(new Action(() =>
+                            {
+                                errProvider.SetError(txtEmail, "Sai thông tin đăng nhập, vui lòng kiểm tra lại");
+                            }));
+                        }
+                    });
+                }
+                catch(Exception ex)
+                {
+                    
+                }
+                finally
+                {
+                    cancellationTokenSource.Dispose();
+                    cancellationTokenSource = new CancellationTokenSource();
+                    btnLogin.Text = "LOGIN";
+                }
             }
             else
             {

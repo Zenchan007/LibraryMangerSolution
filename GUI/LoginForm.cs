@@ -62,8 +62,9 @@ namespace GUI
         }
 
         #endregion
-        private async void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
+            errProvider.Clear();
             if (btnLogin.Text == "LOGIN")
             {
                 btnLogin.Text = "CANCEL";
@@ -73,13 +74,13 @@ namespace GUI
                 try
                 {
                     var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationTokenSource.Token);
-                    await taskCheckAccount.ContinueWith(t =>
+                     taskCheckAccount.ContinueWith(t =>
                     {
                         if (t.IsCanceled)
                         {
                             Trace.WriteLine("Hủy đăng đăng nhập");
                         }
-                        else if (t.Result)
+                        else if ( t.Result )
                         {
                             this.Invoke(new Action(() =>
                             {
@@ -87,6 +88,8 @@ namespace GUI
                                 DashboardForm dashboardForm = new DashboardForm();
                                 dashboardForm.Show(this);
                                 Hide();
+                                cancellationTokenSource.Dispose();
+                                cancellationTokenSource = new CancellationTokenSource();
                             }));
                         }
                         else if (t.IsFaulted)
@@ -97,20 +100,15 @@ namespace GUI
                         {
                             tblLogin.Invoke(new Action(() =>
                             {
-                                errProvider.SetError(txtEmail, "Sai thông tin đăng nhập, vui lòng kiểm tra lại");
+                                errProvider.SetError(txtEmail, "Please check your account information");
+                                btnLogin.Text = "LOGIN";
                             }));
                         }
                     });
                 }
                 catch(Exception ex)
                 {
-                    
-                }
-                finally
-                {
-                    cancellationTokenSource.Dispose();
-                    cancellationTokenSource = new CancellationTokenSource();
-                    btnLogin.Text = "LOGIN";
+                    throw ex;
                 }
             }
             else
@@ -137,9 +135,6 @@ namespace GUI
         txtPassword.ForeColor = Color.White;
         txtPassword.PasswordChar = true;
     }
-
-
-
     private void txtPassword_Leave(object sender, EventArgs e)
     {
         if (txtPassword.Texts == "")

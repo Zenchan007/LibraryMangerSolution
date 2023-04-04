@@ -34,24 +34,24 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnSingup = new System.Windows.Forms.Button();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnMinimize = new FontAwesome.Sharp.IconButton();
+            this.btnExit = new FontAwesome.Sharp.IconButton();
+            this.cPictureBox1 = new CustomControl.CPictureBox();
             this.txtReEnterPassword = new CustomControl.CTextBox();
             this.txtPassword = new CustomControl.CTextBox();
             this.txtEmail = new CustomControl.CTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtUsername = new CustomControl.CTextBox();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cPictureBox1 = new CustomControl.CPictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnExit = new FontAwesome.Sharp.IconButton();
-            this.btnMinimize = new FontAwesome.Sharp.IconButton();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tblSignUp.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tblSignUp
@@ -79,7 +79,6 @@
             this.tblSignUp.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblSignUp.Size = new System.Drawing.Size(534, 822);
             this.tblSignUp.TabIndex = 2;
-           // this.tblSignUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tblSignUp_MouseDown);
             // 
             // label1
             // 
@@ -92,7 +91,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "SignUp";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            //this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -142,6 +140,88 @@
             this.btnSingup.Text = "SIGN-UP";
             this.btnSingup.UseVisualStyleBackColor = false;
             this.btnSingup.Click += new System.EventHandler(this.btnSingup_Click);
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.cPictureBox1, 0, 1);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(528, 281);
+            this.tableLayoutPanel3.TabIndex = 16;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnMinimize);
+            this.panel1.Controls.Add(this.btnExit);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(522, 50);
+            this.panel1.TabIndex = 1;
+            // 
+            // btnMinimize
+            // 
+            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnMinimize.FlatAppearance.BorderSize = 0;
+            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            this.btnMinimize.IconColor = System.Drawing.Color.Black;
+            this.btnMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnMinimize.IconSize = 20;
+            this.btnMinimize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnMinimize.Location = new System.Drawing.Point(438, 0);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Padding = new System.Windows.Forms.Padding(5);
+            this.btnMinimize.Size = new System.Drawing.Size(42, 50);
+            this.btnMinimize.TabIndex = 9;
+            this.btnMinimize.UseVisualStyleBackColor = true;
+            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.IconChar = FontAwesome.Sharp.IconChar.Xmark;
+            this.btnExit.IconColor = System.Drawing.Color.Black;
+            this.btnExit.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnExit.IconSize = 20;
+            this.btnExit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnExit.Location = new System.Drawing.Point(480, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Padding = new System.Windows.Forms.Padding(5);
+            this.btnExit.Size = new System.Drawing.Size(42, 50);
+            this.btnExit.TabIndex = 8;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // cPictureBox1
+            // 
+            this.cPictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cPictureBox1.BorderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
+            this.cPictureBox1.BorderColor = System.Drawing.Color.DimGray;
+            this.cPictureBox1.BorderColor2 = System.Drawing.Color.Gainsboro;
+            this.cPictureBox1.BorderLineStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.cPictureBox1.BorderSize = 1;
+            this.cPictureBox1.GradientAngle = 50F;
+            this.cPictureBox1.Image = global::GUI.Properties.Resources.library1;
+            this.cPictureBox1.Location = new System.Drawing.Point(164, 68);
+            this.cPictureBox1.Name = "cPictureBox1";
+            this.cPictureBox1.Size = new System.Drawing.Size(200, 200);
+            this.cPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.cPictureBox1.TabIndex = 2;
+            this.cPictureBox1.TabStop = false;
             // 
             // txtReEnterPassword
             // 
@@ -253,90 +333,6 @@
             // 
             this.errProvider.ContainerControl = this;
             // 
-            // cPictureBox1
-            // 
-            this.cPictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cPictureBox1.BorderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
-            this.cPictureBox1.BorderColor = System.Drawing.Color.DimGray;
-            this.cPictureBox1.BorderColor2 = System.Drawing.Color.Gainsboro;
-            this.cPictureBox1.BorderLineStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cPictureBox1.BorderSize = 1;
-            this.cPictureBox1.GradientAngle = 50F;
-            this.cPictureBox1.Image = global::GUI.Properties.Resources.library1;
-            this.cPictureBox1.Location = new System.Drawing.Point(164, 68);
-            this.cPictureBox1.Name = "cPictureBox1";
-            this.cPictureBox1.Size = new System.Drawing.Size(200, 200);
-            this.cPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.cPictureBox1.TabIndex = 2;
-            this.cPictureBox1.TabStop = false;
-        //    this.cPictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cPictureBox1_MouseDown);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnMinimize);
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(522, 50);
-            this.panel1.TabIndex = 1;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.IconChar = FontAwesome.Sharp.IconChar.Xmark;
-            this.btnExit.IconColor = System.Drawing.Color.Black;
-            this.btnExit.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnExit.IconSize = 20;
-            this.btnExit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnExit.Location = new System.Drawing.Point(480, 0);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Padding = new System.Windows.Forms.Padding(5);
-            this.btnExit.Size = new System.Drawing.Size(42, 50);
-            this.btnExit.TabIndex = 8;
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnMinimize
-            // 
-            this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnMinimize.FlatAppearance.BorderSize = 0;
-            this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
-            this.btnMinimize.IconColor = System.Drawing.Color.Black;
-            this.btnMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnMinimize.IconSize = 20;
-            this.btnMinimize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnMinimize.Location = new System.Drawing.Point(438, 0);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Padding = new System.Windows.Forms.Padding(5);
-            this.btnMinimize.Size = new System.Drawing.Size(42, 50);
-            this.btnMinimize.TabIndex = 9;
-            this.btnMinimize.UseVisualStyleBackColor = true;
-            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.cPictureBox1, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(528, 281);
-            this.tableLayoutPanel3.TabIndex = 16;
-          //  this.tableLayoutPanel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel3_MouseDown);
-            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -352,11 +348,11 @@
             this.tblSignUp.ResumeLayout(false);
             this.tblSignUp.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

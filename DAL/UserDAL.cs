@@ -30,24 +30,55 @@ namespace DAL
 
         public async Task<bool> CheckAccount(string eMail, string Pass, CancellationToken cancellationToken = default)
         {
-            await Task.Delay(400, cancellationToken);
+            await Task.Delay(3000, cancellationToken);
             if (cancellationToken.IsCancellationRequested)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-
             }
-            var reader = await UserHaveExist(eMail);
-            if (reader != null)
-            {
-                while (await reader.ReadAsync())
+            
+            
+                //    var reader = await UserHaveExist(eMail);
+                //    if (reader != null)
+                //    {
+                //        while (await reader.ReadAsync())
+                //        {
+                //            if (Pass == reader.GetString(1))
+                //            {
+                //                return true;
+                //            }
+                //            else
+                //            {
+                //                throw new Exception("Incorrect password");
+                //            };
+                //        }
+                //    }
+                //    else
+                //    {
+                //        throw new Exception("Please check your account information");
+                //    }
+
+                //}
+                //catch (Exception e)
+                //{
+
+                //    throw e;
+                //}
+                //finally
+                //{
+                //    closeConnection();
+                //}
+                var reader = await UserHaveExist(eMail);
+                if (reader != null)
                 {
-                    if (Pass == reader.GetString(1))
+                    while (await reader.ReadAsync())
                     {
-                        return true;
+                        if (Pass == reader.GetString(1))
+                        {
+                            return true;
+                        }
                     }
                 }
-            }
-            return false;
+                return false;
         }
         //public async Task<bool> CheckAccount(string eMail, string Pass)
         //{

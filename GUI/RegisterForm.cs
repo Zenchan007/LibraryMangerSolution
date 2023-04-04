@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DAL;
@@ -13,12 +15,14 @@ namespace GUI
 {
     public partial class RegisterForm : Form
     {
+        
         public RegisterForm()
         {
             InitializeComponent();
             txtUsername.Focus();
         }
 
+        //CancellationTokenSource cts = new CancellationTokenSource();
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -98,13 +102,14 @@ namespace GUI
             txtReEnterPassword.ForeColor = Color.DimGray;
         }
 
-        private async void  btnSingup_Click(object sender, EventArgs e)
+        private  void  btnSingup_Click(object sender, EventArgs e)
         {
             string userName = (txtUsername.Texts == "USERNAME") ? "" : txtUsername.Texts;
-            string eMail = (txtEmail.Texts == "EMAIL") ? "": txtEmail.Texts;
+            string eMail = (txtEmail.Texts == "EMAIL") ? "" : txtEmail.Texts;
             string passWord = (txtPassword.Texts == "PASSWORD") ? "" : txtPassword.Texts;
             string reEnterPassword = (txtReEnterPassword.Texts == "RE-ENTER PASSWORD") ? "" : txtEmail.Texts;
             var userDAL = new UserDAL();
+            
             try
             {
                 if (userName == "" || eMail == "" || passWord == "" || reEnterPassword == "")
@@ -115,15 +120,32 @@ namespace GUI
                     throw new Exception("Verify password does not match");
                 string strEmail = eMail.ToLower();
 
-                var us = await userDAL.UserHaveExist(eMail);
-                if (us != null)
+                var taskCheckUserHaveExist = userDAL.UserHaveExist(eMail);
+                taskCheckUserHaveExist.ContinueWith(t =>
                 {
-                    throw new Exception("Email already in use");
-                }
-                await userDAL.InsertUserDAL(userName, eMail, passWord);
-                MessageBox.Show("Successfully registered an account, please login.");
-                Owner.Show();
-                this.Close();
+                   if(t.Status == TaskStatus.Faulted)
+                    {
+                        Trace.TraceError("Có lỗi xảy ra");
+
+                    }else if(t.Status == TaskStatus.Canceled)
+                    {
+                        Trace.TraceError("Task Bị hủy giữa chừng!!");
+                    }
+                    else
+                    {
+                        var us = t.Result;
+                        if (us != null)
+                        {
+                            throw new Exception("Email already in use");
+                        }
+                    }
+                });
+                 var taskInsertUser = userDAL.InsertUserDAL(userName, eMail, passWord);
+                taskInsertUser.ContinueWith(t => {
+
+                    if (Owner != null && !Owner.Disposing && !Owner.IsDisposed && !Owner.Visible)
+                        Owner.Show();
+                });
             }
             catch (Exception ex)
             {
@@ -134,7 +156,6 @@ namespace GUI
                 userDAL.Dispose_Connection();
             }
         }
-
         private void txtUsername_Load(object sender, EventArgs e)
         {
             txtUsername.Focus();

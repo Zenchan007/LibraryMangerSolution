@@ -20,10 +20,6 @@ namespace GUI
         {
             InitializeComponent();
         }
-        private void BookForm_Load(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-        }
         private void OpenChildform(Form childForm)
         {
                 currentChildform = childForm;
@@ -33,7 +29,6 @@ namespace GUI
                 pnlChildform.Controls.Add(currentChildform);
                 childForm.BringToFront();
                 childForm.Show();
-            
         }
 
        
@@ -48,6 +43,11 @@ namespace GUI
         private void btnBook_Click(object sender, EventArgs e)
         {
             OpenChildform(new BookForm());
+        }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

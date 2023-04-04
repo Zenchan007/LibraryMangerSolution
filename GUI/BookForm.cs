@@ -13,9 +13,9 @@ namespace GUI
 {
     public partial class BookForm : Form
     {
-        int pageIndex = 0;
-        int pageSize = 50;
-        int maxPage;
+        private int pageIndex = 0;
+        private int pageSize = 50;
+        private int maxPage;
         DataSet ds = null;
         public BookForm()
         {
@@ -31,13 +31,13 @@ namespace GUI
         }
         public async Task Load_Data()
         {
+            dtgBook.ClearSelection();
             string bookName = ConvertTextbox(txtBookName.Texts, "Tên sách");
             string author = ConvertTextbox(txtAuthor.Texts, "Tên tác giả");
             string category = ConvertTextbox(txtCategory.Texts, "Thể loại");
             string status = ConvertTextbox(txtStatus.Texts, "Trạng thái");
             BookDAL bookDAL = new BookDAL();
             ds = await bookDAL.getDataBook(bookName, author, category, status, pageIndex, pageSize);
-            //MessageBox.Show(ds.Tables[0].Rows.Count.ToString());
             dtgBook.DataSource = ds.Tables[0];
             maxPage = BookDAL.maxPage;
             if (pageIndex == 0)

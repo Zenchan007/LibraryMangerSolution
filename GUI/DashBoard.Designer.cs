@@ -230,15 +230,16 @@
             // 
             // DashboardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1313, 753);
             this.Controls.Add(this.pnlChildform);
             this.Controls.Add(this.pnlNav);
+            this.MinimumSize = new System.Drawing.Size(1200, 800);
             this.Name = "DashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BookForm";
-            this.Load += new System.EventHandler(this.BookForm_Load);
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.DashboardForm_Load);
             this.pnlNav.ResumeLayout(false);
             this.ResumeLayout(false);
 

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.pnlLogo = new System.Windows.Forms.Panel();
+            this.cPictureBox1 = new CustomControl.CPictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tblLogin = new System.Windows.Forms.TableLayoutPanel();
             this.btnLogin = new System.Windows.Forms.Button();
@@ -40,12 +41,11 @@
             this.lblSignup = new System.Windows.Forms.LinkLabel();
             this.btnMinimize = new FontAwesome.Sharp.IconButton();
             this.btnExit = new FontAwesome.Sharp.IconButton();
-            this.cPictureBox1 = new CustomControl.CPictureBox();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tblLogin.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,6 +56,19 @@
             resources.ApplyResources(this.pnlLogo, "pnlLogo");
             this.pnlLogo.Name = "pnlLogo";
             this.pnlLogo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlLogo_MouseDown);
+            // 
+            // cPictureBox1
+            // 
+            resources.ApplyResources(this.cPictureBox1, "cPictureBox1");
+            this.cPictureBox1.BorderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
+            this.cPictureBox1.BorderColor = System.Drawing.Color.DimGray;
+            this.cPictureBox1.BorderColor2 = System.Drawing.Color.Gainsboro;
+            this.cPictureBox1.BorderLineStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.cPictureBox1.BorderSize = 2;
+            this.cPictureBox1.GradientAngle = 50F;
+            this.cPictureBox1.Image = global::GUI.Properties.Resources.library1;
+            this.cPictureBox1.Name = "cPictureBox1";
+            this.cPictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -159,20 +172,7 @@
             this.btnExit.IconSize = 20;
             this.btnExit.Name = "btnExit";
             this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
-            // 
-            // cPictureBox1
-            // 
-            resources.ApplyResources(this.cPictureBox1, "cPictureBox1");
-            this.cPictureBox1.BorderCapStyle = System.Drawing.Drawing2D.DashCap.Flat;
-            this.cPictureBox1.BorderColor = System.Drawing.Color.DimGray;
-            this.cPictureBox1.BorderColor2 = System.Drawing.Color.Gainsboro;
-            this.cPictureBox1.BorderLineStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cPictureBox1.BorderSize = 2;
-            this.cPictureBox1.GradientAngle = 50F;
-            this.cPictureBox1.Image = global::GUI.Properties.Resources.library1;
-            this.cPictureBox1.Name = "cPictureBox1";
-            this.cPictureBox1.TabStop = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // errProvider
             // 
@@ -193,10 +193,10 @@
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LoginForm_MouseDown);
             this.pnlLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tblLogin.ResumeLayout(false);
             this.tblLogin.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
 

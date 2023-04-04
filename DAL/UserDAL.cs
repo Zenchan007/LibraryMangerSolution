@@ -28,16 +28,31 @@ namespace DAL
             }
         }
 
-        //public async Task<bool> CheckAccount(string eMail, string Pass, CancellationToken cancellationToken)
+        public async Task<bool> CheckAccount(string eMail, string Pass, CancellationToken cancellationToken = default)
+        {
+            await Task.Delay(400, cancellationToken);
+            if (cancellationToken.IsCancellationRequested)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+            }
+            var reader = await UserHaveExist(eMail);
+            if (reader != null)
+            {
+                while (await reader.ReadAsync())
+                {
+                    if (Pass == reader.GetString(1))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        //public async Task<bool> CheckAccount(string eMail, string Pass)
         //{
         //    try
         //    {
-        //        await Task.Delay(3000, cancellationToken);
-        //        if (cancellationToken.IsCancellationRequested)
-        //        {
-        //            cancellationToken.ThrowIfCancellationRequested();
-
-        //        }
         //        var reader = await UserHaveExist(eMail);
         //        if (reader != null)
         //        {
@@ -64,44 +79,12 @@ namespace DAL
 
         //        throw e;
         //    }
+        //    finally
+        //    {
+        //        closeConnection();
+        //    }
         //    return false;
         //}
-        public async Task<bool> CheckAccount(string eMail, string Pass)
-        {
-            try
-            {
-                var reader = await UserHaveExist(eMail);
-                if (reader != null)
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        if (Pass == reader.GetString(1))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            throw new Exception("Incorrect password");
-                        };
-                    }
-                }
-                else
-                {
-                    throw new Exception("Please check your account information");
-                }
-
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-            finally
-            {
-                closeConnection();
-            }
-            return false;
-        }
         public async Task InsertUserDAL(string userName, string eMail, string passWord)
         {
             using (SqlCommand myCommand = new SqlCommand())

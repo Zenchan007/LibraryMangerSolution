@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -22,7 +23,7 @@ namespace GUI
         private void LoginForm_Load(object sender, EventArgs e)
         {
         }
-        private void btnExit_Click_1(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             // tắt app
             Application.Exit();
@@ -61,72 +62,6 @@ namespace GUI
         }
 
         #endregion
-        //private void btnLogin_Click(object sender, EventArgs e)
-        //{
-        //    xxx();
-        //}
-
-        //private async Task xxx()
-        //{
-        //    CancellationToken cancellationToken = cancellationTokenSource.Token;
-        //    try
-        //    {
-        //        if (btnLogin.Text == "LOGIN")
-        //        {
-        //            btnLogin.Text = "CANCEL";
-        //            string strEmail = txtEmail.Texts;
-        //            string strPass = txtPassword.Texts;
-        //            UserDAL userDAL = new UserDAL();
-        //            var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationToken);
-        //            await taskCheckAccount.ContinueWith(antecedent =>
-        //            {
-        //                if (taskCheckAccount.Exception != null)
-        //                {
-        //                    throw taskCheckAccount.Exception;
-        //                }
-        //                else if (taskCheckAccount.Result)
-        //                {
-        //                    if (this.InvokeRequired)
-        //                    {
-        //                        this.Invoke(new Action(() =>
-        //                        {
-        //                            DashboardForm dashboard = new DashboardForm();
-        //                            dashboard.Show(this);
-        //                            Hide();
-        //                        }));
-        //                    }
-        //                    else
-        //                    {
-        //                        throw new Exception("Không hợp lệ");
-        //                    }
-        //                }
-        //            });
-        //        }
-        //        else
-        //        {
-        //            btnLogin.Text = "LOGIN";
-        //            if (cancellationTokenSource != null)
-        //            {
-        //                cancellationTokenSource.Cancel();
-        //            }
-        //        }
-        //    }
-        //    catch (OperationCanceledException ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        cancellationTokenSource.Dispose();
-        //    }
-        //}
-
-
-
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (btnLogin.Text == "LOGIN")
@@ -135,74 +70,90 @@ namespace GUI
                 string strEmail = txtEmail.Texts;
                 string strPass = txtPassword.Texts;
                 UserDAL userDAL = new UserDAL();
-                bool checkAc = await userDAL.CheckAccount(strEmail, strPass);
-                try
-                {
-                    if (checkAc)
-                    {
-                        DashboardForm dashboardForm = new DashboardForm();
-                        dashboardForm.StartPosition = FormStartPosition.CenterParent;
-                        dashboardForm.Show(this);
-                        Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Invalid email or password.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    errProvider.SetError(txtEmail, ex.Message);
-                }
+                var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationTokenSource.Token);
+                await taskCheckAccount.ContinueWith(t =>
+               {
+                   if (t.IsCanceled)
+                   {
+                       Trace.WriteLine("Hủy đăng đăng nhập");
+                   }
+                   else if (t.Result)
+                   {
+                       this.Invoke(new Action(() =>
+                       {
+                           Trace.WriteLine("Đăng nhập thành công");
+                           DashboardForm dashboardForm = new DashboardForm();
+                           dashboardForm.Show(this);
+                           Hide();
+                       }));
+                   }
+                   else if (t.IsFaulted)
+                   {
+                       Trace.WriteLine("Có lỗi khi đang nhập");
+                   }
+                   else
+                   {
+                       errProvider.SetError(txtEmail, "Sai thông tin đăng nhập, vui lòng kiểm tra lại");
+                   }
+                   cancellationTokenSource.Dispose();
+                   cancellationTokenSource = new CancellationTokenSource();
+               });
             }
-        }
-        private void lblSignup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            RegisterForm register = new RegisterForm();
-            register.Show(this);
-            Hide();
-        }
-        #region xử lý các sự kiện nhấp vào và nhả ra của của ô email và ô password
-
-        private void txtPassword_Enter(object sender, EventArgs e)
-        {
-            if (txtPassword.Texts == "PASSWORD")
+            else
             {
-                txtPassword.Texts = "";
-
-            }
-            txtPassword.ForeColor = Color.White;
-            txtPassword.PasswordChar = true;
+                btnLogin.Text = "LOGIN";
+                cancellationTokenSource.Cancel();
+            }   
         }
-
-
-
-        private void txtPassword_Leave(object sender, EventArgs e)
-        {
-            if (txtPassword.Texts == "")
-            {
-                txtPassword.Texts = "PASSWORD";
-            }
-            txtPassword.ForeColor = Color.DimGray;
-        }
-
-        private void txtEmail_Leave(object sender, EventArgs e)
-        {
-            if (txtEmail.Texts == "")
-            {
-                txtEmail.Texts = "EMAIL";
-            }
-            txtEmail.ForeColor = Color.DimGray;
-        }
-        private void txtEmail_Enter(object sender, EventArgs e)
-        {
-            if (txtEmail.Texts == "EMAIL")
-            {
-                txtEmail.Texts = "";
-            }
-            txtEmail.ForeColor = Color.White;
-        }
-        #endregion
+    private void lblSignup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+        RegisterForm register = new RegisterForm();
+        register.Show(this);
+        Hide();
     }
+    #region xử lý các sự kiện nhấp vào và nhả ra của của ô email và ô password
+
+    private void txtPassword_Enter(object sender, EventArgs e)
+    {
+        if (txtPassword.Texts == "PASSWORD")
+        {
+            txtPassword.Texts = "";
+
+        }
+        txtPassword.ForeColor = Color.White;
+        txtPassword.PasswordChar = true;
+    }
+
+
+
+    private void txtPassword_Leave(object sender, EventArgs e)
+    {
+        if (txtPassword.Texts == "")
+        {
+            txtPassword.Texts = "PASSWORD";
+        }
+        txtPassword.ForeColor = Color.DimGray;
+    }
+
+    private void txtEmail_Leave(object sender, EventArgs e)
+    {
+        if (txtEmail.Texts == "")
+        {
+            txtEmail.Texts = "EMAIL";
+        }
+        txtEmail.ForeColor = Color.DimGray;
+    }
+    private void txtEmail_Enter(object sender, EventArgs e)
+    {
+        if (txtEmail.Texts == "EMAIL")
+        {
+            txtEmail.Texts = "";
+        }
+        txtEmail.ForeColor = Color.White;
+    }
+    #endregion
+
+
+}
 
 }

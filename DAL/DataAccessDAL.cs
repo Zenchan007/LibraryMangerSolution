@@ -24,13 +24,13 @@ namespace DAL
             return conn;
         }
 
-        public void closeConnection()
+        public SqlConnection closeConnection()
         {
             if (conn != null || conn.State == ConnectionState.Open)
             {
                 conn.Close();
             }
-            
+            return conn;
         }
         public void Dispose_Connection()
         {

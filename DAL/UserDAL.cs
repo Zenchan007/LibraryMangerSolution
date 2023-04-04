@@ -32,11 +32,11 @@ namespace DAL
         //{
         //    try
         //    {
-        //        Thread.Sleep(5000);
+        //        await Task.Delay(3000, cancellationToken);
         //        if (cancellationToken.IsCancellationRequested)
         //        {
         //            cancellationToken.ThrowIfCancellationRequested();
-                    
+
         //        }
         //        var reader = await UserHaveExist(eMail);
         //        if (reader != null)
@@ -57,16 +57,12 @@ namespace DAL
         //        {
         //            throw new Exception("Please check your account information");
         //        }
-                
+
         //    }
         //    catch (Exception e)
         //    {
 
         //        throw e;
-        //    }
-        //    finally
-        //    {
-        //        closeConnection();
         //    }
         //    return false;
         //}

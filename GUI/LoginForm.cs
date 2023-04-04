@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class LoginForm : Form
     {
-        private CancellationTokenSource cancellationTokenSource;
+        private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         public LoginForm()
         {
             InitializeComponent();
@@ -63,60 +63,69 @@ namespace GUI
         #endregion
         //private void btnLogin_Click(object sender, EventArgs e)
         //{
-        //    cancellationTokenSource = new CancellationTokenSource();
+        //    xxx();
+        //}
+
+        //private async Task xxx()
+        //{
         //    CancellationToken cancellationToken = cancellationTokenSource.Token;
-        //    if (btnLogin.Text == "LOGIN")
+        //    try
         //    {
-        //        btnLogin.Text = "CANCEL";
-        //        string strEmail = txtEmail.Texts;
-        //        string strPass = txtPassword.Texts;
-        //        UserDAL userDAL = new UserDAL();
-        //        var task = userDAL.CheckAccount(strEmail, strPass, cancellationToken);
-
-        //        task.ContinueWith(antecedent =>
+        //        if (btnLogin.Text == "LOGIN")
         //        {
-        //            try
+        //            btnLogin.Text = "CANCEL";
+        //            string strEmail = txtEmail.Texts;
+        //            string strPass = txtPassword.Texts;
+        //            UserDAL userDAL = new UserDAL();
+        //            var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationToken);
+        //            await taskCheckAccount.ContinueWith(antecedent =>
         //            {
-        //                if (antecedent.IsCanceled)
+        //                if (taskCheckAccount.Exception != null)
         //                {
-        //                    MessageBox.Show("Operation canceled.");
+        //                    throw taskCheckAccount.Exception;
         //                }
-        //                else if (antecedent.IsFaulted)
+        //                else if (taskCheckAccount.Result)
         //                {
-        //                    Exception ex = antecedent.Exception.InnerException;
-        //                    errProvider.SetError(txtEmail, ex.Message);
+        //                    if (this.InvokeRequired)
+        //                    {
+        //                        this.Invoke(new Action(() =>
+        //                        {
+        //                            DashboardForm dashboard = new DashboardForm();
+        //                            dashboard.Show(this);
+        //                            Hide();
+        //                        }));
+        //                    }
+        //                    else
+        //                    {
+        //                        throw new Exception("Không hợp lệ");
+        //                    }
         //                }
-        //                else if (antecedent.Result)
-        //                {
-        //                    DashboardForm dashboardForm = new DashboardForm();
-        //                    dashboardForm.Show(this);
-        //                    Hide();
-        //                }
-        //                else
-        //                {
-        //                    MessageBox.Show("Invalid email or password.");
-        //                }
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                errProvider.SetError(txtEmail, ex.Message);
-        //            }
-        //            finally
-        //            {
-        //                cancellationTokenSource.Dispose();
-        //            }
-        //        }, cancellationToken);
-
-        //    }
-        //    else
-        //    {
-        //        if (cancellationTokenSource != null)
+        //            });
+        //        }
+        //        else
         //        {
-        //            cancellationTokenSource.Cancel();
         //            btnLogin.Text = "LOGIN";
+        //            if (cancellationTokenSource != null)
+        //            {
+        //                cancellationTokenSource.Cancel();
+        //            }
         //        }
         //    }
+        //    catch (OperationCanceledException ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        cancellationTokenSource.Dispose();
+        //    }
         //}
+
+
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
@@ -132,6 +141,7 @@ namespace GUI
                     if (checkAc)
                     {
                         DashboardForm dashboardForm = new DashboardForm();
+                        dashboardForm.StartPosition = FormStartPosition.CenterParent;
                         dashboardForm.Show(this);
                         Hide();
                     }

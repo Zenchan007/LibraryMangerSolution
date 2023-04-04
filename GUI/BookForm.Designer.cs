@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -41,6 +41,7 @@
             this.ibtnNext = new FontAwesome.Sharp.IconButton();
             this.ibtnBack = new FontAwesome.Sharp.IconButton();
             this.ibtnStart = new FontAwesome.Sharp.IconButton();
+            this.txtPage = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtStatusInfor = new CustomControl.CTextBox();
             this.txtCategoryInfor = new CustomControl.CTextBox();
@@ -53,13 +54,12 @@
             this.ibtnAddBook = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtBookName = new CustomControl.CTextBox();
-            this.txtCategory = new CustomControl.CTextBox();
-            this.txtStatus = new CustomControl.CTextBox();
-            this.txtAuthor = new CustomControl.CTextBox();
             this.ibtnSearch = new FontAwesome.Sharp.IconButton();
-            this.txtPage = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtAuthor = new CustomControl.CTextBox();
+            this.txtStatus = new CustomControl.CTextBox();
+            this.txtCategory = new CustomControl.CTextBox();
+            this.txtBookName = new CustomControl.CTextBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -140,23 +140,23 @@
             this.dtgBook.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dtgBook.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dtgBook.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.DeepPink;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.MediumSlateBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.HotPink;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.DeepPink;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MediumSlateBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.HotPink;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgBook.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgBook.ColumnHeadersHeight = 50;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.MediumSlateBlue;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.LightPink;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.DeepPink;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgBook.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightPink;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.DeepPink;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgBook.DefaultCellStyle = dataGridViewCellStyle2;
             this.dtgBook.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dtgBook.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dtgBook.Location = new System.Drawing.Point(3, 3);
@@ -262,6 +262,19 @@
             this.ibtnStart.TabIndex = 5;
             this.ibtnStart.UseVisualStyleBackColor = false;
             this.ibtnStart.Click += new System.EventHandler(this.ibtnStart_Click);
+            // 
+            // txtPage
+            // 
+            this.txtPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPage.Enabled = false;
+            this.txtPage.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPage.Location = new System.Drawing.Point(181, 16);
+            this.txtPage.Name = "txtPage";
+            this.txtPage.Size = new System.Drawing.Size(531, 33);
+            this.txtPage.TabIndex = 9;
+            this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
             // 
             // tableLayoutPanel2
             // 
@@ -487,74 +500,28 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1302, 130);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // txtBookName
+            // ibtnSearch
             // 
-            this.txtBookName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBookName.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBookName.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtBookName.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtBookName.BorderSize = 2;
-            this.txtBookName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBookName.ForeColor = System.Drawing.Color.DimGray;
-            this.txtBookName.Location = new System.Drawing.Point(5, 45);
-            this.txtBookName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtBookName.Multiline = false;
-            this.txtBookName.Name = "txtBookName";
-            this.txtBookName.Padding = new System.Windows.Forms.Padding(7);
-            this.txtBookName.PasswordChar = false;
-            this.txtBookName.Size = new System.Drawing.Size(250, 40);
-            this.txtBookName.TabIndex = 1;
-            this.txtBookName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtBookName.Texts = "Tên sách";
-            this.txtBookName.UnderlinedStyle = false;
-            this.txtBookName.Enter += new System.EventHandler(this.txtBookName_Enter);
-            this.txtBookName.Leave += new System.EventHandler(this.txtBookName_Leave);
+            this.ibtnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ibtnSearch.FlatAppearance.BorderSize = 0;
+            this.ibtnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
+            this.ibtnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.ibtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ibtnSearch.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
+            this.ibtnSearch.IconColor = System.Drawing.Color.Black;
+            this.ibtnSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.ibtnSearch.Location = new System.Drawing.Point(1092, 42);
+            this.ibtnSearch.Name = "ibtnSearch";
+            this.ibtnSearch.Size = new System.Drawing.Size(157, 46);
+            this.ibtnSearch.TabIndex = 5;
+            this.ibtnSearch.Text = "Tìm kiếm";
+            this.ibtnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.ibtnSearch.UseVisualStyleBackColor = true;
+            this.ibtnSearch.Click += new System.EventHandler(this.ibtnSearch_Click);
             // 
-            // txtCategory
+            // errorProvider1
             // 
-            this.txtCategory.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtCategory.BackColor = System.Drawing.SystemColors.Window;
-            this.txtCategory.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtCategory.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtCategory.BorderSize = 2;
-            this.txtCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCategory.ForeColor = System.Drawing.Color.DimGray;
-            this.txtCategory.Location = new System.Drawing.Point(525, 45);
-            this.txtCategory.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCategory.Multiline = false;
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Padding = new System.Windows.Forms.Padding(7);
-            this.txtCategory.PasswordChar = false;
-            this.txtCategory.Size = new System.Drawing.Size(250, 40);
-            this.txtCategory.TabIndex = 3;
-            this.txtCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtCategory.Texts = "Thể loại";
-            this.txtCategory.UnderlinedStyle = false;
-            this.txtCategory.Enter += new System.EventHandler(this.txtCategory_Enter);
-            this.txtCategory.Leave += new System.EventHandler(this.txtCategory_Leave);
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtStatus.BackColor = System.Drawing.SystemColors.Window;
-            this.txtStatus.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.txtStatus.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.txtStatus.BorderSize = 2;
-            this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStatus.ForeColor = System.Drawing.Color.DimGray;
-            this.txtStatus.Location = new System.Drawing.Point(785, 45);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.txtStatus.Multiline = false;
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Padding = new System.Windows.Forms.Padding(7);
-            this.txtStatus.PasswordChar = false;
-            this.txtStatus.Size = new System.Drawing.Size(250, 40);
-            this.txtStatus.TabIndex = 4;
-            this.txtStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtStatus.Texts = "Trạng thái";
-            this.txtStatus.UnderlinedStyle = false;
-            this.txtStatus.Enter += new System.EventHandler(this.txtStatus_Enter);
-            this.txtStatus.Leave += new System.EventHandler(this.txtStatus_Leave);
+            this.errorProvider1.ContainerControl = this;
             // 
             // txtAuthor
             // 
@@ -579,41 +546,74 @@
             this.txtAuthor.Enter += new System.EventHandler(this.txtAuthor_Enter);
             this.txtAuthor.Leave += new System.EventHandler(this.txtAuthor_Leave);
             // 
-            // ibtnSearch
+            // txtStatus
             // 
-            this.ibtnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ibtnSearch.FlatAppearance.BorderSize = 0;
-            this.ibtnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DimGray;
-            this.ibtnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.ibtnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ibtnSearch.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlass;
-            this.ibtnSearch.IconColor = System.Drawing.Color.Black;
-            this.ibtnSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.ibtnSearch.Location = new System.Drawing.Point(1092, 42);
-            this.ibtnSearch.Name = "ibtnSearch";
-            this.ibtnSearch.Size = new System.Drawing.Size(157, 46);
-            this.ibtnSearch.TabIndex = 5;
-            this.ibtnSearch.Text = "Tìm kiếm";
-            this.ibtnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.ibtnSearch.UseVisualStyleBackColor = true;
-            this.ibtnSearch.Click += new System.EventHandler(this.ibtnSearch_Click);
+            this.txtStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtStatus.BackColor = System.Drawing.SystemColors.Window;
+            this.txtStatus.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtStatus.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtStatus.BorderSize = 2;
+            this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStatus.ForeColor = System.Drawing.Color.DimGray;
+            this.txtStatus.Location = new System.Drawing.Point(785, 45);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.txtStatus.Multiline = false;
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Padding = new System.Windows.Forms.Padding(7);
+            this.txtStatus.PasswordChar = false;
+            this.txtStatus.Size = new System.Drawing.Size(250, 40);
+            this.txtStatus.TabIndex = 4;
+            this.txtStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtStatus.Texts = "Trạng thái";
+            this.txtStatus.UnderlinedStyle = false;
+            this.txtStatus.Enter += new System.EventHandler(this.txtStatus_Enter);
+            this.txtStatus.Leave += new System.EventHandler(this.txtStatus_Leave);
             // 
-            // txtPage
+            // txtCategory
             // 
-            this.txtPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPage.Enabled = false;
-            this.txtPage.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPage.Location = new System.Drawing.Point(181, 16);
-            this.txtPage.Name = "txtPage";
-            this.txtPage.Size = new System.Drawing.Size(531, 33);
-            this.txtPage.TabIndex = 9;
-            this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
+            this.txtCategory.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtCategory.BackColor = System.Drawing.SystemColors.Window;
+            this.txtCategory.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtCategory.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtCategory.BorderSize = 2;
+            this.txtCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCategory.ForeColor = System.Drawing.Color.DimGray;
+            this.txtCategory.Location = new System.Drawing.Point(525, 45);
+            this.txtCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCategory.Multiline = false;
+            this.txtCategory.Name = "txtCategory";
+            this.txtCategory.Padding = new System.Windows.Forms.Padding(7);
+            this.txtCategory.PasswordChar = false;
+            this.txtCategory.Size = new System.Drawing.Size(250, 40);
+            this.txtCategory.TabIndex = 3;
+            this.txtCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtCategory.Texts = "Thể loại";
+            this.txtCategory.UnderlinedStyle = false;
+            this.txtCategory.Enter += new System.EventHandler(this.txtCategory_Enter);
+            this.txtCategory.Leave += new System.EventHandler(this.txtCategory_Leave);
             // 
-            // errorProvider1
+            // txtBookName
             // 
-            this.errorProvider1.ContainerControl = this;
+            this.txtBookName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtBookName.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBookName.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtBookName.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtBookName.BorderSize = 2;
+            this.txtBookName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBookName.ForeColor = System.Drawing.Color.DimGray;
+            this.txtBookName.Location = new System.Drawing.Point(5, 45);
+            this.txtBookName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtBookName.Multiline = false;
+            this.txtBookName.Name = "txtBookName";
+            this.txtBookName.Padding = new System.Windows.Forms.Padding(7);
+            this.txtBookName.PasswordChar = false;
+            this.txtBookName.Size = new System.Drawing.Size(250, 40);
+            this.txtBookName.TabIndex = 1;
+            this.txtBookName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtBookName.Texts = "Tên sách";
+            this.txtBookName.UnderlinedStyle = false;
+            this.txtBookName.Enter += new System.EventHandler(this.txtBookName_Enter);
+            this.txtBookName.Leave += new System.EventHandler(this.txtBookName_Leave);
             // 
             // BookForm
             // 
@@ -651,10 +651,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private FontAwesome.Sharp.IconButton ibtnSearch;
-        private CustomControl.CTextBox txtBookName;
-        private CustomControl.CTextBox txtCategory;
-        private CustomControl.CTextBox txtStatus;
-        private CustomControl.CTextBox txtAuthor;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
@@ -676,5 +672,9 @@
         private CustomControl.CTextBox txtBookInfor;
         private System.Windows.Forms.TextBox txtPage;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private CustomControl.CTextBox txtBookName;
+        private CustomControl.CTextBox txtCategory;
+        private CustomControl.CTextBox txtStatus;
+        private CustomControl.CTextBox txtAuthor;
     }
 }

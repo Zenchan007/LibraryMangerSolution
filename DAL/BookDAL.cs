@@ -4,15 +4,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-
 namespace DAL
 {
     public class BookDAL : DataAccessDAL
     {
         
         public static int maxPage;
-
         public async Task<DataSet> getDataBook(string bookName, string author, string category, string status, int pageIndex, int pageSize)
         {
             int countSize = 0;
@@ -20,7 +19,7 @@ namespace DAL
             {
                 using (SqlCommand myCommand = new SqlCommand())
                 {
-                    myCommand.Connection = await openConnection();
+                    myCommand.Connection = await ConnectionAsync();
                     myCommand.CommandText = "FilterBookPaging";
                     myCommand.CommandType = System.Data.CommandType.StoredProcedure;
                     myCommand.Parameters.Add("@PageIndex", SqlDbType.Int);
@@ -51,6 +50,7 @@ namespace DAL
                         myAdapter.SelectCommand = myCommand;
                         DataSet dts = new DataSet();
                         myAdapter.Fill(dts);
+                        closeConnection();
                         return dts;
                     }
                 }

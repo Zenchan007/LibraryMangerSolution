@@ -49,6 +49,7 @@ namespace CustomControl
         {
             base.OnLoad(e); // Update lại size control khi trong trạng thái khởi tạo
             UpdateControlHeight();
+            
         }
         protected override void OnKeyDown(KeyEventArgs e) => base.OnKeyDown(e);
         private void UpdateControlHeight()

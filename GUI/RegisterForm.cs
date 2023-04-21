@@ -15,15 +15,15 @@ namespace GUI
 {
     public partial class RegisterForm : Form
     {
-        
+
         public RegisterForm()
         {
             InitializeComponent();
             txtUsername.Focus();
         }
 
-        //CancellationTokenSource cts = new CancellationTokenSource();
-
+        CancellationTokenSource cts = new CancellationTokenSource();
+        #region
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -41,7 +41,7 @@ namespace GUI
 
         private void txtUsername_Enter(object sender, EventArgs e)
         {
-            if (txtUsername.Texts == "USERNAME")
+            if (txtUsername.Texts == "TÊN NGƯỜI DÙNG")
                 txtUsername.Texts = "";
             txtUsername.ForeColor = Color.White;
         }
@@ -55,14 +55,14 @@ namespace GUI
 
         private void txtPassword_Enter(object sender, EventArgs e)
         {
-            if (txtPassword.Texts == "PASSWORD")
+            if (txtPassword.Texts == "MẬT KHẨU")
                 txtPassword.Texts = "";
             txtPassword.PasswordChar = true;
             txtPassword.ForeColor = Color.White;
         }
         private void txtReenterpassword_Enter(object sender, EventArgs e)
         {
-            if (txtReEnterPassword.Texts == "RE-ENTER PASSWORD")
+            if (txtReEnterPassword.Texts == "XÁC NHẬN MẬT KHẨU")
                 txtReEnterPassword.Texts = "";
             txtReEnterPassword.PasswordChar = true;
             txtReEnterPassword.ForeColor = Color.White;
@@ -71,7 +71,7 @@ namespace GUI
         private void txtUsername_Leave(object sender, EventArgs e)
         {
             if (txtUsername.Texts == "")
-                txtUsername.Texts = "USERNAME";
+                txtUsername.Texts = "TÊN NGƯỜI DÙNG";
             txtUsername.ForeColor = Color.DimGray;
         }
 
@@ -86,30 +86,34 @@ namespace GUI
         {
             if (txtPassword.Texts == "")
             {
-                txtPassword.Texts = "PASSWORD";
+                txtPassword.Texts = "MẬT KHẨU";
                 txtPassword.PasswordChar = false;
             }
             txtPassword.ForeColor = Color.DimGray;
-        }    
+        }
 
         private void txtReenterpassword_Leave(object sender, EventArgs e)
         {
             if (txtReEnterPassword.Texts == "")
             {
-                txtReEnterPassword.Texts = "RE-ENTER PASSWORD";
+                txtReEnterPassword.Texts = "XÁC NHẬN MẬT KHẨU";
                 txtReEnterPassword.PasswordChar = false;
             }
             txtReEnterPassword.ForeColor = Color.DimGray;
         }
+        #endregion
+        private void btnSingup_Click(object sender, EventArgs e)
+        {
+            XXX();
+        }
 
-        private  void  btnSingup_Click(object sender, EventArgs e)
+        private async Task XXX()
         {
             string userName = (txtUsername.Texts == "USERNAME") ? "" : txtUsername.Texts;
             string eMail = (txtEmail.Texts == "EMAIL") ? "" : txtEmail.Texts;
             string passWord = (txtPassword.Texts == "PASSWORD") ? "" : txtPassword.Texts;
             string reEnterPassword = (txtReEnterPassword.Texts == "RE-ENTER PASSWORD") ? "" : txtEmail.Texts;
             var userDAL = new UserDAL();
-            
             try
             {
                 if (userName == "" || eMail == "" || passWord == "" || reEnterPassword == "")
@@ -120,31 +124,40 @@ namespace GUI
                     throw new Exception("Verify password does not match");
                 string strEmail = eMail.ToLower();
 
-                var taskCheckUserHaveExist = userDAL.UserHaveExist(eMail);
-                taskCheckUserHaveExist.ContinueWith(t =>
+                var taskCheckUserHaveExist = userDAL.GetUserReader(eMail);
+                await taskCheckUserHaveExist.ContinueWith(t =>
                 {
-                   if(t.Status == TaskStatus.Faulted)
+                    if (t.Status == TaskStatus.Faulted)
                     {
                         Trace.TraceError("Có lỗi xảy ra");
-
-                    }else if(t.Status == TaskStatus.Canceled)
+                    }
+                    else if (t.Status == TaskStatus.Canceled)
                     {
                         Trace.TraceError("Task Bị hủy giữa chừng!!");
                     }
                     else
                     {
-                        var us = t.Result;
-                        if (us != null)
+                        var x = t.Result;
+                        if (x == null)
                         {
-                            throw new Exception("Email already in use");
+                            var taskInser = userDAL.InsertUserDAL(userName, eMail, passWord);
+                            taskInser.ContinueWith(r =>
+                            {
+                                if (r.IsCanceled)
+                                {
+                                    Trace.WriteLine("Bị hủy");
+                                }
+                                else
+                                {
+                                    Trace.WriteLine("Done");
+                                }
+                            });
+                        }
+                        else
+                        {
+                            throw new Exception("Tài khoản đã tồn tại");
                         }
                     }
-                });
-                 var taskInsertUser = userDAL.InsertUserDAL(userName, eMail, passWord);
-                taskInsertUser.ContinueWith(t => {
-
-                    if (Owner != null && !Owner.Disposing && !Owner.IsDisposed && !Owner.Visible)
-                        Owner.Show();
                 });
             }
             catch (Exception ex)
@@ -153,9 +166,10 @@ namespace GUI
             }
             finally
             {
-                userDAL.Dispose_Connection();
+                
             }
         }
+
         private void txtUsername_Load(object sender, EventArgs e)
         {
             txtUsername.Focus();
@@ -163,13 +177,13 @@ namespace GUI
 
         private void RegisterForm_Load(object sender, EventArgs e)
         {
-            
-            foreach(Control control in this.Controls)
+
+            foreach (Control control in this.Controls)
             {
                 control.MouseDown += new MouseEventHandler(control_MouseDown);
                 if (control.HasChildren)
                 {
-                    foreach(Control childControl in control.Controls)
+                    foreach (Control childControl in control.Controls)
                     {
                         childControl.MouseDown += new MouseEventHandler(control_MouseDown);
                     }
@@ -177,17 +191,18 @@ namespace GUI
             }
         }
 
+        #region
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
 
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")] 
-        private extern static void ReleaseCapture(); 
-
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")] 
-        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam); 
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int lparam);
         private void control_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+        #endregion
     }
 
 }

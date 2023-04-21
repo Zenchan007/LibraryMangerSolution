@@ -164,13 +164,15 @@
             this.dtgBook.ReadOnly = true;
             this.dtgBook.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dtgBook.RowHeadersVisible = false;
-            this.dtgBook.RowHeadersWidth = 50;
-            this.dtgBook.RowTemplate.Height = 24;
+            this.dtgBook.RowHeadersWidth = 35;
+            this.dtgBook.RowTemplate.Height = 35;
             this.dtgBook.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgBook.Size = new System.Drawing.Size(895, 535);
             this.dtgBook.TabIndex = 7;
             this.dtgBook.TabStop = false;
             this.dtgBook.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgBook_CellClick);
+            this.dtgBook.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgBook_CellMouseLeave);
+            this.dtgBook.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dtgBook_CellMouseMove);
             this.dtgBook.Paint += new System.Windows.Forms.PaintEventHandler(this.dtgBook_Paint);
             // 
             // tableLayoutPanel5
@@ -267,10 +269,10 @@
             this.txtPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPage.Enabled = false;
-            this.txtPage.Font = new System.Drawing.Font("Microsoft YaHei UI", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPage.Location = new System.Drawing.Point(181, 12);
+            this.txtPage.Font = new System.Drawing.Font("Microsoft YaHei UI", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPage.Location = new System.Drawing.Point(181, 10);
             this.txtPage.Name = "txtPage";
-            this.txtPage.Size = new System.Drawing.Size(531, 37);
+            this.txtPage.Size = new System.Drawing.Size(531, 39);
             this.txtPage.TabIndex = 9;
             this.txtPage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPage_KeyDown);
@@ -305,6 +307,7 @@
             this.txtStatusInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.txtStatusInfor.BorderFocusColor = System.Drawing.Color.Pink;
             this.txtStatusInfor.BorderSize = 2;
+            this.txtStatusInfor.Enabled = false;
             this.txtStatusInfor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStatusInfor.ForeColor = System.Drawing.Color.DimGray;
             this.txtStatusInfor.Location = new System.Drawing.Point(25, 472);
@@ -327,6 +330,7 @@
             this.txtCategoryInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.txtCategoryInfor.BorderFocusColor = System.Drawing.Color.Pink;
             this.txtCategoryInfor.BorderSize = 2;
+            this.txtCategoryInfor.Enabled = false;
             this.txtCategoryInfor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCategoryInfor.ForeColor = System.Drawing.Color.DimGray;
             this.txtCategoryInfor.Location = new System.Drawing.Point(25, 360);
@@ -349,6 +353,7 @@
             this.txtAuthorInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.txtAuthorInfor.BorderFocusColor = System.Drawing.Color.Pink;
             this.txtAuthorInfor.BorderSize = 2;
+            this.txtAuthorInfor.Enabled = false;
             this.txtAuthorInfor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAuthorInfor.ForeColor = System.Drawing.Color.DimGray;
             this.txtAuthorInfor.Location = new System.Drawing.Point(25, 252);
@@ -371,6 +376,7 @@
             this.txtBookInfor.BorderColor = System.Drawing.Color.MediumSlateBlue;
             this.txtBookInfor.BorderFocusColor = System.Drawing.Color.Pink;
             this.txtBookInfor.BorderSize = 2;
+            this.txtBookInfor.Enabled = false;
             this.txtBookInfor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBookInfor.ForeColor = System.Drawing.Color.DimGray;
             this.txtBookInfor.Location = new System.Drawing.Point(25, 144);
@@ -430,6 +436,7 @@
             this.ibtnDeleteBook.TabIndex = 2;
             this.ibtnDeleteBook.TabStop = false;
             this.ibtnDeleteBook.UseVisualStyleBackColor = false;
+            this.ibtnDeleteBook.Click += new System.EventHandler(this.ibtnDeleteBook_Click);
             // 
             // ibtnUpdateBook
             // 
@@ -447,6 +454,7 @@
             this.ibtnUpdateBook.TabIndex = 1;
             this.ibtnUpdateBook.TabStop = false;
             this.ibtnUpdateBook.UseVisualStyleBackColor = false;
+            this.ibtnUpdateBook.Click += new System.EventHandler(this.ibtnUpdateBook_Click);
             // 
             // ibtnAddBook
             // 
@@ -465,6 +473,7 @@
             this.ibtnAddBook.TabStop = false;
             this.ibtnAddBook.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.ibtnAddBook.UseVisualStyleBackColor = false;
+            this.ibtnAddBook.Click += new System.EventHandler(this.ibtnAddBook_Click);
             // 
             // panel1
             // 

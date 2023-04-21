@@ -26,7 +26,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private async void InitializeComponent()
+        private  void InitializeComponent()
         {
             this.pnlNav = new System.Windows.Forms.Panel();
             this.btnAccount = new FontAwesome.Sharp.IconButton();
@@ -81,6 +81,7 @@
             this.btnAccount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAccount.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAccount.UseVisualStyleBackColor = true;
+            this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
             // 
             // btnReport
             // 
@@ -104,6 +105,7 @@
             this.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
             // btnLogout
             // 
@@ -151,6 +153,7 @@
             this.btnBorrowbook.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBorrowbook.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBorrowbook.UseVisualStyleBackColor = true;
+            this.btnBorrowbook.Click += new System.EventHandler(this.btnBorrowbook_Click);
             // 
             // btnAuthor
             // 
@@ -174,6 +177,7 @@
             this.btnAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAuthor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAuthor.UseVisualStyleBackColor = true;
+            this.btnAuthor.Click += new System.EventHandler(this.btnAuthor_Click);
             // 
             // btnBook
             // 

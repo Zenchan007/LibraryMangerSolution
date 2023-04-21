@@ -11,119 +11,63 @@ namespace DAL
 {
     public class UserDAL : DataAccessDAL
     {
-        public async Task<SqlDataReader> UserHaveExist(string eMail)
+        public async Task<SqlDataReader> GetUserReader(string eMail, CancellationToken cts = default) 
         {
+            if (cts.IsCancellationRequested)
+            {
+                cts.ThrowIfCancellationRequested();
+            }
             eMail = eMail.ToLower();
             using (SqlCommand myCommand = new SqlCommand())
             {
-                myCommand.Connection = await openConnection();
+                myCommand.Connection = await ConnectionAsync(cts);
                 myCommand.CommandText = $"SELECT u.Mail, u.Pass FROM [USER] AS u WHERE u.Mail = '{eMail}'";
                 var reader = await myCommand.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
-                    return reader;
+                  return reader;
                 }
-                closeConnection();
                 return null;
             }
         }
 
-        public async Task<bool> CheckAccount(string eMail, string Pass, CancellationToken cancellationToken = default)
+        public async Task<bool> CheckAccountHaveExist(string eMail, CancellationToken cts = default)
         {
-            await Task.Delay(3000, cancellationToken);
-            if (cancellationToken.IsCancellationRequested)
+            var reader = await GetUserReader(eMail, cts);
+            if(reader == null)
             {
-                cancellationToken.ThrowIfCancellationRequested();
+                return false;
             }
-            
-            
-                //    var reader = await UserHaveExist(eMail);
-                //    if (reader != null)
-                //    {
-                //        while (await reader.ReadAsync())
-                //        {
-                //            if (Pass == reader.GetString(1))
-                //            {
-                //                return true;
-                //            }
-                //            else
-                //            {
-                //                throw new Exception("Incorrect password");
-                //            };
-                //        }
-                //    }
-                //    else
-                //    {
-                //        throw new Exception("Please check your account information");
-                //    }
-
-                //}
-                //catch (Exception e)
-                //{
-
-                //    throw e;
-                //}
-                //finally
-                //{
-                //    closeConnection();
-                //}
-                var reader = await UserHaveExist(eMail);
-                if (reader != null)
+            return true;
+        }
+        
+        
+        public async Task<bool> CheckAccounInfomationt(string eMail, string Pass, CancellationToken cts = default)
+        {
+            if (cts.IsCancellationRequested)
+            {
+                cts.ThrowIfCancellationRequested();
+            }
+            var reader = await GetUserReader(eMail, cts);
+            if (reader != null)
+            {
+                while (await reader.ReadAsync())
                 {
-                    while (await reader.ReadAsync())
+                    if (Pass == reader.GetString(1))
                     {
-                        if (Pass == reader.GetString(1))
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
-                return false;
+            }
+            return false;
         }
-        //public async Task<bool> CheckAccount(string eMail, string Pass)
-        //{
-        //    try
-        //    {
-        //        var reader = await UserHaveExist(eMail);
-        //        if (reader != null)
-        //        {
-        //            while (await reader.ReadAsync())
-        //            {
-        //                if (Pass == reader.GetString(1))
-        //                {
-        //                    return true;
-        //                }
-        //                else
-        //                {
-        //                    throw new Exception("Incorrect password");
-        //                };
-        //            }
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("Please check your account information");
-        //        }
-
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        throw e;
-        //    }
-        //    finally
-        //    {
-        //        closeConnection();
-        //    }
-        //    return false;
-        //}
-        public async Task InsertUserDAL(string userName, string eMail, string passWord)
+        public async Task InsertUserDAL(string userName, string eMail, string passWord, CancellationToken cts = default)
         {
             using (SqlCommand myCommand = new SqlCommand())
             {
-                myCommand.Connection = await openConnection();
+                myCommand.Connection = await ConnectionAsync(cts);  
                 myCommand.CommandType = CommandType.Text;
                 myCommand.CommandText = String.Format($"Insert into [USER] (Mail, Name, Pass) values ('{eMail}', '{userName}', '{passWord}')");
-                myCommand.Connection = conn;
                 await myCommand.ExecuteNonQueryAsync();
                 closeConnection();
             }

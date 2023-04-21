@@ -16,6 +16,8 @@ namespace GUI
     public partial class LoginForm : Form
     {
         private CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        private string defautTextLogin = "Vui lòng điền email hoặc tên tài khoản";
+        private string defautTextPassword = "Vui lòng điền mật khẩu";
         public LoginForm()
         {
             InitializeComponent();
@@ -64,105 +66,168 @@ namespace GUI
         #endregion
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            lbErr.Visible = false;
             errProvider.Clear();
-            if (btnLogin.Text == "LOGIN")
+            if (btnLogin.Text == "ĐĂNG NHẬP")
             {
-                btnLogin.Text = "CANCEL";
+                btnLogin.Text = "HỦY ĐĂNG NHẬP";
                 string strEmail = txtEmail.Texts;
                 string strPass = txtPassword.Texts;
                 UserDAL userDAL = new UserDAL();
                 try
                 {
-                    var taskCheckAccount = userDAL.CheckAccount(strEmail, strPass, cancellationTokenSource.Token);
-                     taskCheckAccount.ContinueWith(t =>
-                    {
-                        if (t.IsCanceled)
-                        {
-                            Trace.WriteLine("Hủy đăng đăng nhập");
-                        }
-                        else if ( t.Result )
-                        {
-                            this.Invoke(new Action(() =>
-                            {
-                                Trace.WriteLine("Đăng nhập thành công");
-                                DashboardForm dashboardForm = new DashboardForm();
-                                dashboardForm.Show(this);
-                                Hide();
-                                cancellationTokenSource.Dispose();
-                                cancellationTokenSource = new CancellationTokenSource();
-                            }));
-                        }
-                        else if (t.IsFaulted)
-                        {
-                            Trace.WriteLine("Có lỗi khi đang nhập");
-                        }
-                        else
-                        {
-                            tblLogin.Invoke(new Action(() =>
-                            {
-                                errProvider.SetError(txtEmail, "Please check your account information");
-                                btnLogin.Text = "LOGIN";
-                            }));
-                        }
-                    });
+                    var taskCheckAccount = userDAL.CheckAccounInfomationt(strEmail, strPass, cancellationTokenSource.Token);
+                    taskCheckAccount.ContinueWith(t =>
+                   {
+                       if (t.IsCanceled) // task bị hủy giữa chừng
+                       {
+                           Trace.WriteLine("Hủy đăng đăng nhập");
+                       }
+                       else if (t.Result) // task chạy và có kết quả == true;
+                       {
+                           this.Invoke(new Action(() =>
+                           {
+                               Trace.WriteLine("Đăng nhập thành công");
+                               DashboardForm dashboardForm = new DashboardForm();
+                               dashboardForm.Show(this);
+                               Hide();
+                               btnLogin.Text = "ĐĂNG NHẬP";
+                           }));
+                       }
+                       else if (t.IsFaulted)
+                       {
+                           Trace.WriteLine("Có lỗi khi đang nhập");
+                       }
+                       else // task chạy và có kết quả = false;
+                       {
+                           tblLogin.Invoke(new Action(() =>
+                           {
+                               errProvider.Clear();
+                               //errProvider.SetError(txtEmail, "Vui lòng kiểm tra lại thông tin tài khoản");
+                               lbErr.Text = "Tài khoản hoặc mật khẩu không đúng. vui lòng kiểm tra lại";
+                               lbErr.Visible = true;
+                               btnLogin.Text = "ĐĂNG NHẬP";
+                           }));
+                       }
+                       cancellationTokenSource.Dispose();
+                       cancellationTokenSource = new CancellationTokenSource();
+                   });
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw ex;
                 }
             }
             else
             {
-                btnLogin.Text = "LOGIN";
+                btnLogin.Text = "ĐĂNG NHẬP";
                 cancellationTokenSource.Cancel();
-            }   
+            }
         }
-    private void lblSignup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-    {
-        RegisterForm register = new RegisterForm();
-        register.Show(this);
-        Hide();
-    }
-    #region xử lý các sự kiện nhấp vào và nhả ra của của ô email và ô password
-
-    private void txtPassword_Enter(object sender, EventArgs e)
-    {
-        if (txtPassword.Texts == "PASSWORD")
+        private void lblSignup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            txtPassword.Texts = "";
-
+            RegisterForm register = new RegisterForm();
+            register.Show(this);
+            Hide();
         }
-        txtPassword.ForeColor = Color.White;
-        txtPassword.PasswordChar = true;
-    }
-    private void txtPassword_Leave(object sender, EventArgs e)
-    {
-        if (txtPassword.Texts == "")
+        #region xử lý enter, leave, validating của textbox
+        private void txtEmail_Leave(object sender, EventArgs e)
         {
-            txtPassword.Texts = "PASSWORD";
+            if (txtEmail.Texts == "")
+            {
+                txtEmail.Texts = defautTextLogin;
+            }
+            txtEmail.ForeColor = Color.DimGray;
         }
-        txtPassword.ForeColor = Color.DimGray;
-    }
-
-    private void txtEmail_Leave(object sender, EventArgs e)
-    {
-        if (txtEmail.Texts == "")
+        private void txtEmail_Enter(object sender, EventArgs e)
         {
-            txtEmail.Texts = "EMAIL";
+            if (txtEmail.Texts == defautTextLogin)
+            {
+                txtEmail.Texts = "";
+            }
+            txtEmail.ForeColor = Color.White;
+            Trace.WriteLine(txtPassword.Texts);
         }
-        txtEmail.ForeColor = Color.DimGray;
-    }
-    private void txtEmail_Enter(object sender, EventArgs e)
-    {
-        if (txtEmail.Texts == "EMAIL")
+        private void txtPassword_Leave(object sender, EventArgs e)
         {
-            txtEmail.Texts = "";
+            if (txtPassword.Texts == "")
+            {
+                txtPassword.Texts = defautTextPassword;
+                txtPassword.PasswordChar = false;
+            }
+            txtPassword.ForeColor = Color.DimGray;
+            Trace.WriteLine(txtPassword.Texts);
         }
-        txtEmail.ForeColor = Color.White;
+
+        private void txtPassword_Enter(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = true;
+            if (txtPassword.Texts == defautTextPassword)
+            {
+                txtPassword.Texts = "";
+            }
+            txtPassword.ForeColor = Color.White;
+            Trace.WriteLine(txtPassword.Texts);
+        }
+        private void txtEmail_Validating(object sender, CancelEventArgs e)
+        {
+            txtEmail.Texts = (txtEmail.Texts == defautTextLogin ? "" : txtEmail.Texts);
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtEmail.Texts))
+                {
+                    throw new Exception("Vui lòng điền thông tin tài khoản");
+                }
+                else
+                {
+                    errProvider.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                errProvider.SetError(txtEmail, ex.Message);
+                txtEmail.Texts =defautTextLogin;
+            }
+        }
+        private void txtPassword_Validating(object sender, CancelEventArgs e)
+        {
+            txtPassword.Texts = (txtPassword.Texts == defautTextPassword ? "" : txtPassword.Texts); // check xem mail và pass có text hay không? 
+            txtEmail.Texts = (txtEmail.Texts == defautTextLogin ? "" : txtEmail.Texts);
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtPassword.Texts)) // Pass không có text
+                {
+                    if (string.IsNullOrWhiteSpace(txtEmail.Texts)) // Mail cũng không có text
+                    {
+                        txtPassword.Texts = defautTextPassword; // thì set về trạng thái ban đầu
+                        errProvider.Clear();
+                    }
+                    else throw new Exception("Vui lòng điền mật khẩu"); // Mail có text
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(txtEmail.Texts))
+                    {
+                        if (txtPassword.Texts.Length < 8)
+                        {
+                            throw new Exception("Mật khẩu không được nhỏ hơn 8 ký tự");
+                        }
+                        else
+                        {
+                            errProvider.Clear(); // Pass có thì clear lỗi
+                        }
+                    } 
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                errProvider.SetError(txtPassword, ex.Message);
+            }
+        }
+        #endregion
+
     }
-    #endregion
-
-
-}
 
 }

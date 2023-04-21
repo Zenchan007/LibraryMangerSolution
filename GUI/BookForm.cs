@@ -31,13 +31,22 @@ namespace GUI
         }
         public async Task Load_Data()
         {
-            dtgBook.ClearSelection();
+            dtgBook.AutoGenerateColumns = false;
+            dtgBook.DataSource = null;
+            dtgBook.ColumnCount = 6;
             string bookName = ConvertTextbox(txtBookName.Texts, "Tên sách");
             string author = ConvertTextbox(txtAuthor.Texts, "Tên tác giả");
             string category = ConvertTextbox(txtCategory.Texts, "Thể loại");
             string status = ConvertTextbox(txtStatus.Texts, "Trạng thái");
             BookDAL bookDAL = new BookDAL();
             ds = await bookDAL.getDataBook(bookName, author, category, status, pageIndex, pageSize);
+            await Rename_column();
+            dtgBook.Columns[0].DataPropertyName = "BookName";
+            dtgBook.Columns[1].DataPropertyName = "Author";
+            dtgBook.Columns[2].DataPropertyName = "Category";
+            dtgBook.Columns[3].DataPropertyName = "Price";
+            dtgBook.Columns[4].DataPropertyName = "Status";
+            dtgBook.Columns[5].DataPropertyName = "Quantity";
             dtgBook.DataSource = ds.Tables[0];
             maxPage = BookDAL.maxPage;
             if (pageIndex == 0)
@@ -51,7 +60,7 @@ namespace GUI
                 ibtnBack.Enabled = true;
             }
 
-            if ((pageIndex + 1) >= maxPage && ibtnEnd.Enabled == true)
+            if ((pageIndex + 1) >= maxPage)
             {
                 ibtnNext.Enabled = false;
                 ibtnEnd.Enabled = false;
@@ -65,6 +74,15 @@ namespace GUI
             this.Refresh();
         }
 
+        public async Task Rename_column()
+        {
+            dtgBook.Columns[0].HeaderText = "Tên sách";           
+            dtgBook.Columns[1].HeaderText = "Tên tác giả";           
+            dtgBook.Columns[2].HeaderText = "Tên thể loại";        
+            dtgBook.Columns[3].HeaderText = "Giá";       
+            dtgBook.Columns[4].HeaderText = "Trạng thái";       
+            dtgBook.Columns[5].HeaderText = "Số lượng";
+        }
         private void txtBookName_Enter(object sender, EventArgs e)
         {
             if (txtBookName.Texts == "Tên sách")
@@ -189,10 +207,10 @@ namespace GUI
                 txtAuthorInfor.DataBindings.Clear();
                 txtCategoryInfor.DataBindings.Clear();
                 txtStatusInfor.DataBindings.Clear();
-                txtBookInfor.DataBindings.Add("Texts", ds.Tables[0], "Tên sách");
-                txtAuthorInfor.DataBindings.Add("Texts", ds.Tables[0], "Tên tác giả");
-                txtCategoryInfor.DataBindings.Add("Texts", ds.Tables[0], "Tên thể loại");
-                txtStatusInfor.DataBindings.Add("Texts", ds.Tables[0], "Trạng thái");
+                txtBookInfor.DataBindings.Add("Texts", ds.Tables[0], "BookName");
+                txtAuthorInfor.DataBindings.Add("Texts", ds.Tables[0], "Author");
+                txtCategoryInfor.DataBindings.Add("Texts", ds.Tables[0], "Category");
+                txtStatusInfor.DataBindings.Add("Texts", ds.Tables[0], "Status");
             }
         }
 
@@ -218,5 +236,39 @@ namespace GUI
             }
 
         }
+
+        private void ibtnAddBook_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibtnUpdateBook_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ibtnDeleteBook_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void dtgBook_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.RowIndex > -1)
+            {
+                dtgBook.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.AliceBlue;
+                dtgBook.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+            }
+        }
+
+        private void dtgBook_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                dtgBook.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                dtgBook.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Blue;
+            }
+        }
     }
+    
 }
